@@ -1,0 +1,323 @@
+/*custom font*/
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+
+
+h2{    
+
+    font-size: 4rem;
+
+    color: #222222;
+
+    text-align: center;
+
+    margin-top: 3%;
+
+}
+
+
+
+
+
+body {
+
+	font-family: montserrat, arial, verdana;
+
+}
+
+/*form styles*/
+
+#msform {
+
+	width: 100%;
+
+	margin: 50px auto;
+
+	text-align: center;
+
+	position: relative;
+
+}
+
+
+
+#msform .groupmsform{
+
+    padding-left: 23%;
+
+}
+
+
+
+#msform fieldset {
+
+	background: white;
+
+	border: 3px solid #ec0203;
+
+	border-radius: 3px;
+
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+
+	padding: 20px 30px;
+
+	box-sizing: border-box;
+
+	width: 44%;
+
+	margin: 0 10%;
+
+	
+
+	/*stacking fieldsets above each other*/
+
+	position: relative;
+
+}
+
+
+
+
+
+
+
+#msform fieldset label{
+
+    float: left;
+
+    margin-bottom: 1%;
+
+}
+
+
+
+/*Hide all except first fieldset*/
+
+#msform fieldset:not(:first-of-type) {
+
+	display: none;
+
+}
+
+/*inputs*/
+
+#msform input, #msform textarea, #msform select {
+
+	padding: 8px;
+
+	border: 1px solid #ccc;
+
+	border-radius: 3px;
+
+	margin-bottom: 10px;
+
+	width: 100%;
+
+	box-sizing: border-box;
+
+	font-family: montserrat;
+
+	color: #2C3E50;
+
+	font-size: 13px;
+
+}
+
+/*buttons*/
+
+#msform .action-button {
+
+	/* width: 100px; */
+
+	background: #bd4848;
+
+	font-weight: bold;
+
+	color: white;
+
+	border: 0 none;
+
+	border-radius: 1px;
+
+	cursor: pointer;
+
+	padding: 13px 13px;
+
+	margin: 10px 5px;
+
+}
+
+#msform .action-button:hover, #msform .action-button:focus {
+
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+
+}
+
+/*headings*/
+
+.fs-title {
+
+	font-size: 25px;
+
+	text-transform: uppercase;
+
+	color: #2C3E50;
+
+    margin-bottom: 10px;
+
+    font-weight: bold;
+
+}
+
+.fs-subtitle {
+
+	font-weight: normal;
+
+	font-size: 13px;
+
+	color: #666;
+
+	margin-bottom: 20px;
+
+}
+
+/*progressbar*/
+
+#progressbar {
+
+	margin-bottom: 30px;
+
+	overflow: hidden;
+
+	/*CSS counters to number the steps*/
+
+    counter-reset: step;
+
+    margin-left: 7%;
+
+    width: 50%;
+
+}
+
+#progressbar li {
+
+	list-style-type: none;
+
+	/* color: white; */
+
+	text-transform: uppercase;
+
+	font-size: 9px;
+
+	width: 20%;
+
+	float: left;
+
+	position: relative;
+
+}
+
+#progressbar li:before {
+
+	content: counter(step);
+
+	counter-increment: step;
+
+	width: 30px;
+
+	line-height: 30px;
+
+	display: block;
+
+	font-size: 10px;
+
+	color: #333;
+
+	background: #5a5555;
+
+	border-radius: 50%;
+
+	margin: 0 auto 5px auto;
+
+}
+
+/*progressbar connectors*/
+
+#progressbar li:after {
+
+	content: '';
+
+	width: 100%;
+
+	height: 2px;
+
+	background: #5a5555;
+
+	position: absolute;
+
+	left: -50%;
+
+	top: 9px;
+
+	z-index: -1; /*put it behind the numbers*/
+
+}
+
+#progressbar li:first-child:after {
+
+	/*connector not needed before the first step*/
+
+	content: none; 
+
+}
+
+/*marking active/completed steps green*/
+
+/*The number of the step and the connector before it = green*/
+
+#progressbar li.active:before,  #progressbar li.active:after{
+
+	background: #bd4848;
+
+	color: white;
+
+}
+
+
+
+
+
+.btn-group-fab {
+  position: fixed;
+  width: 80px;
+  height: auto;
+  right: 20px; bottom: 20px;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-group-fab div {
+  position: relative;
+  width: 100%;
+  height: auto; 
+  justify-content: center;
+  text-align: center;
+}
+.btn-group-fab .btn {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  display: block;
+  margin-bottom: 4px;
+  /*margin: 4px auto;*/
+  font-size: 30px;
+}
+.btn-group-fab .btn-main {
+  width: 50px; height: 50px;
+  right: 50%; margin-right: -25px;
+  z-index: 9; 
+}
+.btn-group-fab .btn-main .fas{
+  margin-left: -3px;
+}
