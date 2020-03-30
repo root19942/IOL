@@ -36,4 +36,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'dob' => 'datetime',
     ];
+    public function paiements()
+    {
+        return $this->hasMany('App\Paiement', 'user_id');
+    }
 }

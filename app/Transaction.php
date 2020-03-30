@@ -14,4 +14,10 @@ class Transaction extends Model
     protected $fillable = [
         'details'
       ];
+
+      public function paiements()
+      {
+          return this->hasMany('App\Paiement', 'transaction_id');
+      }
+
 }

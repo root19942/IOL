@@ -16,4 +16,12 @@ class Paiement extends Model
         'transaction_id',
         'status'
       ];
+      public function user()
+      {
+          return $this->belongsTo('App\User', 'user_id');
+      }
+      public function transaction()
+      {
+          return $this->belongsTo('App\Transaction', 'transaction_id');
+      }
 }
