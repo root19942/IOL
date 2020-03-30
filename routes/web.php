@@ -36,7 +36,7 @@ Route::get('/home/{locale}', function ($locale) {
 	app()->setLocale($locale);
 	Cookie::queue('language', $locale, "1000");
 	$favories = Favories::where('user', auth()->id())->get();
-	for ($i=0; $i < count($favories) ; $i++) { 
+	for ($i=0; $i < count($favories) ; $i++) {
 		$favories[$i]['user'] = User::where('id', $favories[$i]['favorie_user'])->get();
 	}
     return view('pages.accueil')->withFavories($favories)->withLocale($locale);
@@ -135,7 +135,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 Route::group([
-  'prefix' => '{locale}', 
+  'prefix' => '{locale}',
   'where' => ['locale' => '[a-zA-Z]{2}'],
   'middleware' => 'setlocale'
 ], function () {
@@ -144,7 +144,7 @@ Route::group([
 Route::get('/abonement', function () {
 	return view('pages.abonement');
 })->name('abonement');
-
+Route::get('/payment/{details}','PaymentController@store')->name("payment.store");
 
 
 

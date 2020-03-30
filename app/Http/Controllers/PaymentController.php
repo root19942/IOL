@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Transaction;
+use App\Paiement;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -22,5 +25,24 @@ class PaymentController extends Controller
         $this->_api_context->setConfig($paypal_conf['settings']);
     }
 
+    /**
+     * store transaction
+     *
+     * @param Json $details
+     * @return Response
+     */
+    public function store($details)
+    {
+        $transaction = Transaction::create([
+            "details" => $details
+        ]);
+        $payment = Paiement::create([
+            "user_id" => Auth::user()->id,
+            "transaction" => $transaction->id,
+            "status" => $details->status
+        ]);
+
+         return redirect()->route('accueilVide');
+    }
 
 }
