@@ -17,7 +17,7 @@ class Transaction extends Model
 
       public function paiements()
       {
-          return this->hasMany('App\Paiement', 'transaction_id');
+          return $this->hasMany('App\Paiement', 'transaction_id');
       }
 
 }

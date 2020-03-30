@@ -60,6 +60,8 @@
                 }
               }).render('#form-footer');</script>
           </div>
+         <button class="" id="payWithMonetBil" type="submit">Pay by Mobile Money</button></form>
+
 		</form>
 	  </div>
 	</div>
@@ -67,7 +69,34 @@
 
 
 
+<script src=" {{ url('/js/jquery.min.js') }}"></script>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://fr.monetbil.com/widget/v2/monetbil.min.js"></script>
+<script type="text/javascript">
+    $('#payWithMonetBil').on("click", function(e){
+        e.preventDefault();
+        $.ajax({
+            url: "https://api.monetbil.com/widget/2.1/HtWFxQmxwK0uP1aXASGQSjqjx1vDbAwm",
+            type: "post",
+            data: {'amount':"200"},
+            success: function (data) {
+                console.log(data)
+                if(data.success){
+                    alert(' Transaction Successfull');
+                }else{
+                    alert('Transaction Failed');
+                    console.log(data);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                /*console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);*/
+                alert('Echec connection');
+            }
+        });
+    });
+
+</script>
 </body>
 </html>
