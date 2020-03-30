@@ -44,7 +44,7 @@
                             url: 'payment/'+details,
                             type: 'get',
                             success: function (data) {
-
+                                alert(' Transaction Successfull');
                             },
                             error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
                                 /*console.log(JSON.stringify(jqXHR));
