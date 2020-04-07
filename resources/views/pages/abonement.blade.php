@@ -16,49 +16,55 @@
             <small id="emailHelp" class="form-text text-muted">Vos informations sont en securité.</small>
 
           <div id="form-footer">
-            <script src="https://www.paypal.com/sdk/js?client-id=ARcLURdx4DRfJXoJImggjQIOA6vEyptTlbyQBwiTRH6EISwQIN46YIevn4PfJWGswrPavZdGkZivGRhz"></script>
-            <script>paypal.Buttons({
-                createOrder: function(data, actions) {
-                  // This function sets up the details of the transaction, including the amount and line item details.
-                  return actions.order.create({
-                    purchase_units: [{
-                      reference_id : 'PU1',
-                      description : 'Abonnement for IOL medium',
-                      invoice_id : 'ab-iol-12',
-                      custom_id : 'CUST-IOL',
-                      amount: {
-                        currency_code : 'USD',
-                        value: '50'
-                      }
-
-                    }]
-                  });
-                },
-                onApprove: function(data, actions) {
-                  // This function captures the funds from the transaction.
-                  return actions.order.capture().then(function(details) {
-                    // This function shows a transaction success message to your buyer.
-                    if(details.status == "COMPLETED"){
-
-                        $.ajax({
-                            url: 'payment/'+details,
-                            type: 'get',
-                            success: function (data) {
-                                alert(' Transaction Successfull');
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                                /*console.log(JSON.stringify(jqXHR));
-                                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);*/
-                            }
-                        });
-                    }else{
-                        alert('Failed Transaction!!! Please try again ' );
-
-                    }
-
-                  });
-                }
-              }).render('#form-footer');</script>
+            <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+            <script>
+                paypal.Button.render({
+                  env: 'production',
+                  client: {
+                    production: 'AfNPF2gw5-MoRk47F3L26UaBRy1UE9yLAVQ00b6v-yn22sx0G_3ExuI5H3ovoxuk6thjmeasI1T1lMfm'
+                  },
+                  // Customize button (optional)
+                  locale: 'en_US',
+                  style: {
+                    size: 'small',
+                    color: 'gold',
+                    shape: 'pill',
+                  },
+              
+                  // Enable Pay Now checkout flow (optional)
+                  commit: true,
+                  // Set up a payment
+                  payment: function(data, actions) {
+                    return actions.payment.create({
+                      transactions: [{
+                        amount: {
+                          total: '0.01',
+                          currency: 'USD'
+                        }
+                      }]
+                    });
+                  },
+                   // Execute the payment
+                  onAuthorize: function(data, actions) {
+                    return actions.payment.execute().then(function() {
+                      // Show a confirmation message to the buyer
+                      $.ajax({
+                        url: 'payment/'+details,
+                        type: 'get',
+                        success: function (data) {
+                            alert(' Transaction Successfull');
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                            /*console.log(JSON.stringify(jqXHR));
+                            console.log("AJAX error: " + textStatus + ' : ' + errorThrown);*/
+                        }
+                    });
+                   window.alert('Thank you for your purchase!');
+                    });
+                  }
+                }, '#form-footer');
+                
+              </script>
           </div>
          <button class="" id="payWithMonetBil" type="submit">Pay by Mobile Money</button></form>
 
